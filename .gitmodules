@@ -1,0 +1,15 @@
+[submodule "libopencm3"]
+	path = libopencm3
+	url = https://github.com/libopencm3/libopencm3
+[submodule "libopencm3-examples"]
+	path = libopencm3-examples
+	url = https://github.com/libopencm3/libopencm3-examples
+[submodule "stlink"]
+	path = stlink
+	url = https://github.com/texane/stlink.git
+[submodule "stm32loader"]
+	path = stm32loader
+	url = https://github.com/jsnyder/stm32loader
+[submodule "stm32flash"]
+	path = stm32flash
+	url = https://github.com/toxygen/stm32flash
