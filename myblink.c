@@ -146,7 +146,7 @@ static void calc_buffer(int half) {
    // mark refclock if old enough
    if (!calc_buffer_ctr) {
       buffer[half][0] |= 128;
-      calc_buffer_ctr = 5;
+      calc_buffer_ctr = 2;
    } else calc_buffer_ctr--;
 }
 
@@ -182,7 +182,7 @@ static void timer2_setup(void) {
    timer_set_prescaler(TIM2, 35); // 72MHz / 36 -> 2MHz
    timer_continuous_mode(TIM2);
    timer_set_counter(TIM2, 0);
-   timer_set_period(TIM2, 1);  // -> 2MHz / 2
+   timer_set_period(TIM2, 3);  // -> 2MHz / 4
    timer_set_dma_on_update_event(TIM2);
 
    // Update DMA Request enable (no timer IRQ's...)
@@ -234,20 +234,20 @@ static void buffer_setup(void) {
    int i, ctr = 0, mask;
    calc_buffer(0);
    calc_buffer(1);
-   printf("buffer initialized\n");
+   //printf("buffer initialized\n");
    // DBG: output buffer pattern analysis
-   for (i=0;i<HALF_BUFFER_SIZE;i++) {
+/*   for (i=0;i<HALF_BUFFER_SIZE;i++) {
       for(mask=0x40;mask;mask >>= 1) {
          if (buffer[0][i] & mask) ctr++;
          if (buffer[1][i] & mask) ctr++;
       }
    }
-   printf("starting with %d pulses/frame\n", ctr*3);
+   printf("starting with %d pulses/frame\n", ctr*3); /**/
 
    dma_setup();
-   printf("dma ready\n");
+   //printf("dma ready\n");
    timer2_setup();
-   printf("timer ready\n");
+   //printf("timer ready\n");
    dma_enable_channel(DMA1, DMA_CHANNEL2);
    timer_enable_counter(TIM2);
 }
@@ -257,11 +257,11 @@ int main(void) {
    rcc_clock_setup_in_hse_8mhz_out_72mhz();
    systick_setup();
 
-   printf("systick ok\n");
+   //printf("systick ok\n");
    gpio_setup();
-   printf("gpio ok\n");
+   //printf("gpio ok\n");
    buffer_setup();
-   printf("buffer ok\n");
+   //printf("buffer ok\n");
 
 //   cm_enable_interrupts(); // needs cm3/cortex.h
 //   cm_disable_faults();
@@ -269,7 +269,7 @@ int main(void) {
    while(1) {
       gpio_toggle(GPIOC, GPIO13);
       delay(500);
-      printf("free ops: %lu\n", minops);
+      //printf("free ops: %lu\n", minops);
    }
 }
 
