@@ -1,4 +1,4 @@
-BINARY = myblink
+BINARY = usb
 OPENCM3_DIR = libopencm3
 LDSCRIPT = stm32f103c8.ld
 #LDSCRIPT = stm32f103c8_RAM.ld
